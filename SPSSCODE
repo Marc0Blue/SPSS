@@ -1,0 +1,66 @@
+FREQUENCIES VARIABLES=P32 P33 ESTUDIOS ESTATUS
+  /ORDER=ANALYSIS.
+
+RECODE  P33 (MISSING=COPY) (LO THRU 28=1) (LO THRU 39=2) (LO THRU 50=3) (LO THRU 61=4) (LO THRU
+    72=5) (LO THRU 83=6) (LO THRU HI=7) (ELSE=SYSMIS) INTO TestEdad.
+VARIABLE LABELS  TestEdad 'Edad de la persona entrevistada (Agrupada)'.
+FORMATS  TestEdad (F5.0).
+VALUE LABELS  TestEdad 1 '18 - 28' 2 '29 - 39' 3 '40 - 50' 4 '51 - 61' 5 '62 - 72' 6 '73 - 83' 7
+    '84+'.
+VARIABLE LEVEL  TestEdad (ORDINAL).
+EXECUTE.
+FREQUENCIES VARIABLES=TestEdad
+  /STATISTICS=RANGE MINIMUM MAXIMUM MEDIAN MEAN MODE
+  /ORDER=ANALYSIS.
+
+
+CROSSTABS
+  /TABLES=Busca_Documentación_informacion Compra_Producto_Servicio Compra_Entradas_Eventos 
+    Descargar_Comprar_Música Descargar_Ver_Vídeos_Online Leer_Descargar_Online Mantener_Blog_Web 
+    Participar_Redes_Sociales Vende_Bienes_servicios Ve_programas_emitidos_tv_vivo_diferido 
+    Jugar_Descargar_juegos Paricipa_Foros_Chats_Mensajeria Utiliza_espacio_almacenamiento_Online BY 
+    EdadReagrupada
+  /FORMAT=AVALUE TABLES
+  /CELLS=COUNT COLUMN 
+  /COUNT ROUND CELL.
+
+CROSSTABS
+  /TABLES=Busca_Documentación_informacion Compra_Producto_Servicio Descargar_Comprar_Música 
+    Descargar_Ver_Vídeos_Online Leer_Descargar_Online Mantener_Blog_Web Participar_Redes_Sociales 
+    Ve_programas_emitidos_tv_vivo_diferido Paricipa_Foros_Chats_Mensajeria BY ESTATUS
+  /FORMAT=AVALUE TABLES
+  /CELLS=COUNT COLUMN 
+  /COUNT ROUND CELL.
+
+CROSSTABS
+  /TABLES=Busca_Documentación_informacion Compra_Producto_Servicio Descargar_Comprar_Música 
+    Descargar_Ver_Vídeos_Online Leer_Descargar_Online Mantener_Blog_Web Participar_Redes_Sociales 
+    Ve_programas_emitidos_tv_vivo_diferido Paricipa_Foros_Chats_Mensajeria BY ESTUDIOS
+  /FORMAT=AVALUE TABLES
+  /CELLS=COUNT COLUMN 
+  /COUNT ROUND CELL.
+
+
+CROSSTABS
+  /TABLES=Busca_Documentación_informacion Compra_Producto_Servicio Descargar_Comprar_Música 
+    Descargar_Ver_Vídeos_Online Leer_Descargar_Online Mantener_Blog_Web Participar_Redes_Sociales 
+    Ve_programas_emitidos_tv_vivo_diferido Paricipa_Foros_Chats_Mensajeria BY P32
+  /FORMAT=AVALUE TABLES
+  /CELLS=COUNT COLUMN 
+  /COUNT ROUND CELL.
+
+CROSSTABS
+  /TABLES=Busca_Documentación_informacion Compra_Producto_Servicio Descargar_Comprar_Música 
+    Descargar_Ver_Vídeos_Online Leer_Descargar_Online Mantener_Blog_Web Participar_Redes_Sociales 
+    Ve_programas_emitidos_tv_vivo_diferido Paricipa_Foros_Chats_Mensajeria BY P32
+  /FORMAT=AVALUE TABLES
+  /CELLS=COUNT COLUMN 
+  /COUNT ROUND CELL.
+
+
+CROSSTABS
+  /TABLES=Ordenador_PC Teléfono_Movil Ordenador_Portatil Tablet SmartTV_conexión_internet 
+    Otros_Dispositivos BY ESTATUS
+  /FORMAT=AVALUE TABLES
+  /CELLS=COUNT COLUMN 
+  /COUNT ROUND CELL.
